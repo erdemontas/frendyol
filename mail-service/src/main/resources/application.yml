@@ -1,0 +1,49 @@
+spring:
+  kafka:
+    enabled: true
+    properties:
+      security.protocol: 'PLAINTEXT'
+    bootstrap-servers: localhost:9092
+
+    consumer:
+      topic-name: "email-topic"
+      group-id: mail-server
+      project-status-changed: true
+      auto-offset-reset: earliest
+      key-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      value-deserializr: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      properties:
+        spring.deserializer.key.delegate.class: org.apache.kafka.common.serialization.StringDeserializer
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+      listener:
+        missing-topics-fatal: false
+  mail:
+    default-encoding: UTF-8
+    host: localhost
+    jndi-name:
+    username: username
+    password: secret
+    port: 2525
+    properties:
+      mail:
+        debug: false
+        smtp:
+          debug: false
+          auth: true
+          starttls: true
+    protocol: smtp
+    test-connection: false
+#  mail:
+#    host: localhost
+#    port: 1025
+#    properties:
+#      mail.smtp.auth: false
+#      mail.smtp.starttls.enable: false
+#    addresses:
+#      from: "dev@frendyol.com"
+#      replyTo: "no-reply@frendyol.com"
+jackson:
+  serialization:
+    fail-on-empty-beans: false
+    write-dates-as-timestamps: false
+  date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat

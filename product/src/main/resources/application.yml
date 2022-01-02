@@ -1,0 +1,23 @@
+server:
+  ports: 8001
+
+spring:
+  kafka:
+    properties:
+      security.protocol: 'PLAINTEXT'
+
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      topic-name: "email-topic"
+  application:
+    name: product-service
+org:
+  springframework:
+    data:
+      couchbase:
+        useIsoStringConverterForData: true
+
+logging:
+  level:
+    org.springframework.data.couchbase.repository.query: DEBUG
