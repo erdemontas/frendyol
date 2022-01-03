@@ -14,5 +14,6 @@ public class ProductResponse {
     private String description;
     private String category;
     private String created_at;
+    private int stock;
 
 }
